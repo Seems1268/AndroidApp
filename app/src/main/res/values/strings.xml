@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="app_name">RetailStore</string>
+
+    <string name="refreshablelistview_header_hint_updating">Updating&#8230;</string>
+    <string name="dlg_wait_please">Please, wait</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_cart_checkout">Cart Checkout</string>
+    <string name="refresh_error_msg">We\'re sorry!. \n Failed to load data. Please try to refresh after some time.</string>
+    <string name="add_to_cart_btn_txt">Add to Cart</string>
+    <string name="product_price_label_txt">Price:</string>
+    <string name="checkout_cart_summary_label_txt">Summary</string>
+    <string name="checkout_cart_grand_total_label_txt">Grand Total</string>
+    <string name="checkout_cart_delete_btn_txt">Delete</string>
+    
+     <string-array name="navigation_drawer_array">
+        <item>All</item>
+        <item>Electronics</item>
+        <item>Furniture</item>
+    </string-array>
+    
+</resources>
