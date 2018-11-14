@@ -5,11 +5,13 @@ package com.dev.retailstore.db;
  * @author seemasavadi
  */
 
+import android.content.Context;
+
+import com.dev.retailstore.interfaces.OnDBUpdateData;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import android.content.Context;
 
 public class DatabaseManager {
 	
@@ -18,6 +20,8 @@ public class DatabaseManager {
 	private static Context mContext = null;
 	private static final String KEY_CATEGORY = "category";
 	private static final String KEY_ADDEDTOCART = "isAddedToCart";
+
+	private static OnDBUpdateData mOnDBUpdateData;
 
 	
 	public static DatabaseManager getInstance(Context context){
@@ -63,8 +67,17 @@ public class DatabaseManager {
 	}
 	
 	public int updateProduct(Product product){
-		
-		return dbHelper.updateProduct(product);
+
+		int tmp = dbHelper.updateProduct(product);
+
+		if(null != mOnDBUpdateData)
+			mOnDBUpdateData.onProductDataUpdated();
+
+		return tmp;
 	}
 
+
+	public static void setmOnDBUpdateData(OnDBUpdateData mOnDBUpdateData) {
+		DatabaseManager.mOnDBUpdateData = mOnDBUpdateData;
+	}
 }

@@ -24,8 +24,9 @@ import com.dev.retailstore.R;
 import com.dev.retailstore.adapters.CheckoutItemsAdapter;
 import com.dev.retailstore.db.DatabaseManager;
 import com.dev.retailstore.db.Product;
+import com.dev.retailstore.interfaces.OnDBUpdateData;
 
-public class CheckoutCartFragment extends Fragment {
+public class CheckoutCartFragment extends Fragment implements OnDBUpdateData {
 
 	private View view;
 	private TextView product_total;
@@ -115,9 +116,12 @@ public class CheckoutCartFragment extends Fragment {
 	}
 	
 	private void getTotalItemsInCart(){
-		
-		dbManager = DatabaseManager.getInstance(getActivity());
-		
+
+		if(null == dbManager){
+			dbManager = DatabaseManager.getInstance(getActivity());
+			dbManager.setmOnDBUpdateData(this);
+		}
+
 		mProducts = (ArrayList<Product>) dbManager
 				.getAllProductsInCart();
 		
@@ -126,8 +130,16 @@ public class CheckoutCartFragment extends Fragment {
 			totalAmt = totalAmt + Long.valueOf(product.get_price());
 		}
 
+		if(mProducts.isEmpty())
+			totalAmt = 0;
+
 		product_total.setText(String.valueOf(totalAmt));
 	}
-	
 
+
+	@Override
+	public void onProductDataUpdated() {
+
+		getTotalItemsInCart();
+	}
 }

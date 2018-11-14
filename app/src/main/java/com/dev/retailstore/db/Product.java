@@ -104,7 +104,7 @@ public class Product implements Parcelable{
 
 	@Override
 	public int describeContents() {
-		return 0;
+		return hashCode();
 	}
 
 	@Override
